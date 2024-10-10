@@ -1,36 +1,34 @@
-from file_downloader import download_file as download
 import tkinter as tk
+from file_organizer import organize_files
+import os
+
+#Create the main window
+
 
 root = tk.Tk()
-root.title("file downloader")
-root.geometry("500x200")
+root.title("Simple Input and Button GUI")
+root.geometry("300x150")  # Set the window sizeFunction to be called when the button is clicked
 
-def buttonCall():
-    url =urlInput.get()
-    fname = filenameInput.get()
-    print(f"URL:{url}\nFilename:{fname}")
-    download(url, fname)
-    pass
 
-#label enter url
-urlLabel =tk.Label(root, text="URL")
-#rlLabel.pack(padx=10, pady=10)
-urlLabel.grid(row=0,column=0)
+def submit_function():
+    address = entry.get()  # Get text from the entry box
+    print("Address:", address)#Label for entry
+    if os.path.exists(address):
+        organize_files(address)
 
-#url entry
-urlInput = tk.Entry(root)
-#urlInput.pack(padx=10,pady=10)
-urlInput.grid(row=0,column=1)
 
-#label enter filename
-filenameLabel =tk.Label(root,text="Filename")
-filenameLabel.grid(row=1, column=0)
+label = tk.Label(root, text="Enter directory address:")
+label.pack(pady=10)  # Add padding around the labelEntry (input block) where user can type text
 
-#filename entry
-filenameInput = tk.Entry(root)
-filenameInput.grid(row=1, column=1)
 
-#button
-downloadButton = tk.Button(root, text ="Download", command= buttonCall)
-downloadButton.grid(row=2, column=1)
+entry = tk.Entry(root, width=30)
+entry.pack(pady=5)#Button to trigger the function show_input
+
+
+button = tk.Button(root, text="Submit", command=submit_function)
+button.pack(pady=10)#Start the GUI event loop
+
 root.mainloop()
+
+
+
